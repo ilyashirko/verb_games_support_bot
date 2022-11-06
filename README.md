@@ -23,7 +23,7 @@ For loading data just launch:
 python3 create_intents -p {path_to_your_json}
 ```
 
-# How to run
+## How to run
 To run both bots:
 ```sh
 python3 telegram_bot.py | python3 vk_bot.py
