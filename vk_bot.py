@@ -11,6 +11,8 @@ def message_handler(event, vk_api):
         event.user_id,
         event.text,
     )
+    if dialogflow_response.intent.is_fallback:
+        return
     vk_api.messages.send(
         user_id=event.user_id,
         message=dialogflow_response.fulfillment_text,
