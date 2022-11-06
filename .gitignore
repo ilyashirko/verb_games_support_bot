@@ -3,3 +3,4 @@
 *.lock
 
 credentials.json
+**/__pycache__
