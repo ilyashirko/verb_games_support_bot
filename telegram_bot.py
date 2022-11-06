@@ -1,17 +1,7 @@
-from telegram.ext import Updater, Filters, CommandHandler, MessageHandler
 from environs import Env
-from google.cloud import dialogflow
+from telegram.ext import CommandHandler, Filters, MessageHandler, Updater
 
-
-def detect_intent_text(project_id, session_id, text, language_code='ru-RU'):
-    session_client = dialogflow.SessionsClient()
-    session = session_client.session_path(project_id, session_id)
-    text_input = dialogflow.TextInput(text=text, language_code=language_code)
-    query_input = dialogflow.QueryInput(text=text_input)
-    response = session_client.detect_intent(
-        request={"session": session, "query_input": query_input}
-    )
-    return response.query_result
+from dialogflow_processing import detect_intent_text
 
 
 def start(update, context):
