@@ -41,7 +41,6 @@ def run_vk_bot(vk_bot_token: str) -> None:
     logger.info('[VK BOT ERROR] Support bot started')
 
     try:
-        a = 1/0
         for event in longpoll.listen():
             if event.type == VkEventType.MESSAGE_NEW and event.to_me:
                 message_handler(event, vk_api)
