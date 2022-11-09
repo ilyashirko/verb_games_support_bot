@@ -38,14 +38,14 @@ def run_vk_bot(vk_bot_token: str) -> None:
             Bot(env.str('TELEGRAM_BOT_TOKEN')), env.int('ADMIN_TELEGRAM_ID')
         )
     )
-    logger.info('[VK BOT ERROR] Support bot started')
+    logger.info('[VK] Support bot started')
 
     try:
         for event in longpoll.listen():
             if event.type == VkEventType.MESSAGE_NEW and event.to_me:
                 message_handler(event, vk_api)
     except Exception as error:
-        logger.error(msg='[VK]\n', exc_info=error)
+        logger.error(msg='[VK BOT ERROR]\n', exc_info=error)
 
 
 if __name__ == '__main__':
