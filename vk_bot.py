@@ -1,13 +1,18 @@
+import logging
 import random
 
 import vk_api as vk
 from environs import Env
-from vk_api.longpoll import VkEventType, VkLongPoll
+from telegram import Bot
+from vk_api.longpoll import Event, VkEventType, VkLongPoll
 
 from dialogflow_processing import detect_intent_text
+from log_handlers import TelegramLogsHandler
+
+logger = logging.getLogger('log.log')
 
 
-def message_handler(event, vk_api):
+def message_handler(event: Event, vk_api: vk.vk_api.VkApiMethod) -> None:
     dialogflow_response = detect_intent_text(
         env.str('GOOGLE_PROJECT_ID'),
         event.user_id,
@@ -22,17 +27,30 @@ def message_handler(event, vk_api):
     )
 
 
-def run_vk_bot(vk_bot_token):
+def run_vk_bot(vk_bot_token: str) -> None:
     vk_session = vk.VkApi(token=vk_bot_token)
     vk_api = vk_session.get_api()
     longpoll = VkLongPoll(vk_session)
 
-    for event in longpoll.listen():
-        if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-            message_handler(event, vk_api)
+    logger.setLevel(logging.INFO)
+    logger.addHandler(
+        TelegramLogsHandler(
+            Bot(env.str('TELEGRAM_BOT_TOKEN')), env.int('ADMIN_TELEGRAM_ID')
+        )
+    )
+    logger.info('[VK BOT ERROR] Support bot started')
+
+    try:
+        a = 1/0
+        for event in longpoll.listen():
+            if event.type == VkEventType.MESSAGE_NEW and event.to_me:
+                message_handler(event, vk_api)
+    except Exception as error:
+        logger.error(msg='[VK]\n', exc_info=error)
 
 
 if __name__ == '__main__':
     env = Env()
     env.read_env()
+    
     run_vk_bot(env.str('VK_BOT_TOKEN'))
