@@ -7,7 +7,7 @@ readme = "README.md"
 packages = [{include = "verb_games_support_bot"}]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.8"
 python-telegram-bot = "^13.14"
 environs = "^9.5.0"
 google-cloud-dialogflow = "^2.16.0"
