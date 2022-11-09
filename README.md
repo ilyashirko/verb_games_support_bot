@@ -29,3 +29,6 @@ To run both bots:
 ```sh
 python3 telegram_bot.py | python3 vk_bot.py
 ```
+
+## Telegram bot preview
+![Main func](telegram_bot_promo.gif)
