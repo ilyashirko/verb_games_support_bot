@@ -12,6 +12,7 @@ python3 -m venv env && source env/bin/activate && poetry install
 ```
 create `.env` file as in [example](https://github.com/ilyashirko/verb_games_support_bot/blob/master/.env.example).  
 `TELEGRAM_BOT_TOKEN` you can get from [@BotFather](https://t.me/BotFather).  
+`ADMIN_TELEGRAM_ID` - telegram id of user which would be able to get log messages.  
 `VK_BOT_TOKEN` you can get from chapter "working with API" in settings of VK community, where you are administrator.  
 `credentials.json` - create [service account](https://console.cloud.google.com/apis/credentials) and put generated credentials into `credentials.json` (you can see example in [credentials.json.example](https://github.com/ilyashirko/verb_games_support_bot/blob/master/credentials.json.example)).  
 you should set up a dialogflow api to you project in Google Clouds and get there `GOOGLE_PROJECT_ID`.
