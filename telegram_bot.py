@@ -56,7 +56,5 @@ def run_bot() -> None:
 if __name__=='__main__':
     env = Env()
     env.read_env()
-    
-    
 
     run_bot()
